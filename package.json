@@ -1,0 +1,22 @@
+{
+  "name": "first-discord-bot",
+  "version": "1.0.0",
+  "description": "first bot made with discord.js",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zreynolds91/First-Discord.js-Bot.git"
+  },
+  "author": "ZReynolds",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zreynolds91/First-Discord.js-Bot/issues"
+  },
+  "homepage": "https://github.com/zreynolds91/First-Discord.js-Bot#readme",
+  "dependencies": {
+    "discord.js": "^11.1.0"
+  }
+}

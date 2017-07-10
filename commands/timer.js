@@ -3,7 +3,14 @@ const minutes = ["minutes", "m"];
 const hours = ["hours", "h"];
 const timeIntervals = seconds.concat(minutes).concat(hours);
 
-exports.run = function(client, message, args) {
+var killTimer = function(timerObj) {
+  timerObj.unref();
+}
+
+module.exports.run = function(client, message, args) {
+
+  //TODO: add check to make sure the total delay in milliseconds is not over
+  // the size of an int.
 
   // Check for format.
   if(isNaN(args[0])
@@ -15,7 +22,7 @@ exports.run = function(client, message, args) {
   // If correct format, run timer.
   else {
     //timer
-    var multiplier = 1;
+    let multiplier = 1000;
     if(-1 < seconds.indexOf(args[1])) {
       multiplier *= 1;
     }
@@ -28,7 +35,20 @@ exports.run = function(client, message, args) {
     else {
       console.log("!timer command with invalid interval. Should not happen.");
     }
-    message.channel.send("Timer set for " + multiplier * args[0]
-      + " seconds in the future.");
+
+    let time = multiplier * args[0];
+
+    var timerObj = setInterval(() => {
+      var argArr = args;
+      var reminderMessage = argArr.splice(2).join(' ');
+      if(null != reminderMessage && "" != reminderMessage) {
+        message.channel.send(reminderMessage);
+      }
+      else {
+        message.reply("Time is up!");
+      }
+      clearInterval(timerObj);
+    }, time);
+
   }
 };
